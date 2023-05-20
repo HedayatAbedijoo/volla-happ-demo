@@ -2,10 +2,12 @@ import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { AppAgentClient, AppAgentWebsocket } from '@holochain/client';
 import { contextProvider } from '@lit-labs/context';
+import { ProfilesStore, ProfilesClient } from "@holochain-open-dev/profiles";
 
 import { clientContext } from './contexts';
 import '@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js';
 
+import "@holochain-open-dev/profiles/dist/elements/profiles-context.js";
 import './components/ContactList';
 import './components/P2PSync';
 import './components/SecurityZone';
@@ -21,9 +23,16 @@ export class AppComponent extends LitElement {
   @property({ type: Object })
   client!: AppAgentClient;
 
+  @property({ type: Object })
+  profilesStore!: ProfilesStore;
+
   async firstUpdated() {
     this.client = await AppAgentWebsocket.connect(`ws://localhost:16662`, 'hello-world');
-    
+
+    this.profilesStore = new ProfilesStore(new ProfilesClient(this.client, 'hello-world'), {
+      avatarMode: "avatar-optional",
+    });
+
     this.loading = false;
   }
   static styles = css`
@@ -78,9 +87,11 @@ export class AppComponent extends LitElement {
     // eslint-disable-next-line no-console
     console.log("RENDERED PAGE", this.renderActiveComponent())
     return html`
-      <div class="container">
-      ${this.renderActiveComponent()}
-      </div>
+      <profiles-context .store=${this.profilesStore}>
+        <div class="container">
+        ${this.renderActiveComponent()}
+        </div>
+      </profiles-context>
     `;
   }
 }
