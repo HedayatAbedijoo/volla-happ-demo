@@ -6,10 +6,10 @@ import { contextProvider } from '@lit-labs/context';
 import { clientContext } from './contexts';
 import '@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js';
 
-import './components/ContactList.ts';
-import './components/P2PSync.ts';
-import './components/SecurityZone.ts';
-import './home.ts';
+import './components/ContactList';
+import './components/P2PSync';
+import './components/SecurityZone';
+import './home';
 
 @customElement('app-root')
 export class AppComponent extends LitElement {
@@ -50,8 +50,10 @@ export class AppComponent extends LitElement {
   }
 
   handleNavigate(event: Event) {
+    this.loading = true;
     const componentName = (event as CustomEvent).detail;
     this.activeComponent = componentName;
+    this.loading = false;
   }
 
   renderActiveComponent() {
@@ -72,6 +74,9 @@ export class AppComponent extends LitElement {
     return html`
       <p>Loading</p>
     `;
+    
+    // eslint-disable-next-line no-console
+    console.log("RENDERED PAGE", this.renderActiveComponent())
     return html`
       <div class="container">
       ${this.renderActiveComponent()}

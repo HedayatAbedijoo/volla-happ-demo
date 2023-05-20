@@ -1,17 +1,13 @@
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('app-contact-list')
+@customElement('contact-list')
 export class ContactListComponent extends LitElement {
   static styles = css`
-    .container {
-      padding: 1rem;
-       
-    }
-
     h1 {
       font-size: 1.6rem;
       font-weight: 600;
+      color: white;
     }
 
     /* Add additional styling as needed */
