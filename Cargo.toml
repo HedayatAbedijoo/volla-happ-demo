@@ -25,3 +25,9 @@ path = "dnas/hello_world/zomes/coordinator/profiles"
 
 [workspace.dependencies.profiles_integrity]
 path = "dnas/hello_world/zomes/integrity/profiles"
+
+[workspace.dependencies.file_storage]
+path = "dnas/hello_world/zomes/coordinator/file_storage"
+
+[workspace.dependencies.file_storage_integrity]
+path = "dnas/hello_world/zomes/integrity/file_storage"

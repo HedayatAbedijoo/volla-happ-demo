@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@adaburrows/table-web-component": "github:adaburrows/table-web-component",
+    "@holochain-open-dev/file-storage": "^0.4.1",
     "@holochain-open-dev/profiles": "^0.14.1",
     "@holochain-open-dev/stores": "^0.5.2",
     "@holochain/client": "^0.12.2",

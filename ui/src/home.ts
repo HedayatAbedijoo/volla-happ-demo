@@ -48,6 +48,9 @@ export class HomeComponent extends LitElement {
       font-weight: 600;
     }
 
+    em {
+      font-weight: 500;
+    }
     p {
       font-size: 1.2rem;
       font-weight: 300;
@@ -72,20 +75,20 @@ render() {
         <div class="feature-card" @click=${() => this.handleClick('ContactList')}>
         <div class="details">
           <h2>Contact List</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>         <sl-icon-button name="pencil" label="Contact List" style="font-size: 2.5rem; margin-top: 1rem;"></sl-icon-button>
+          <p><em>Backup</em> and <em>restore</em> your Volla contacts</p>
+        </div>         <sl-icon-button name="people" label="Contact List" style="font-size: 2.5rem; margin-top: 1rem;"></sl-icon-button>
           </div>
         <div class="feature-card" @click=${() => this.handleClick('P2PSync')}>
           <div class="details">
             <h2>P2P Sync</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>Share resources <em>securely</em> with <em>trusted</em> parties</p>
           </div>
           <sl-icon-button name="arrow-left-right" label="P2P Sync" style="font-size: 2.5rem; margin-top: 1rem;"></sl-icon-button>
         </div>
         <div class="feature-card" @click=${() => this.handleClick('SecurityZone')}>
           <div class="details">
             <h2>Security Zone</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p><em>Create</em> and <em>store</em> domain whitelists and security templates ready to share</p>
           </div>
           <sl-icon-button name="shield-lock" label="Security" style="font-size: 2.5rem; margin-top: 1rem; color: white;"></sl-icon-button>
         </div>
