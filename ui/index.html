@@ -6,9 +6,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="Description" content="Put your description here." />
-    <base href="/" />
-
     <style>
       html,
       body {
@@ -18,31 +15,13 @@
         background-color: #ededed;
       }
     </style>
-    <title>Example hApp</title>
+    <link rel="stylesheet" href="/shoelace/dist/themes/light.css" />
+    <script type="module" src="/shoelace/dist/shoelace.js"></script>
+    <title>Volla Sync</title>
   </head>
 
   <body>
-    <div id="content"></div>
-
-    <script type="module">
-      import { AppWebsocket, AppAgentWebsocket } from '@holochain/client';
-      
-      async function connect() {
-        // We pass '' as url because it will dynamically be replaced in launcher environments
-        const client = await AppAgentWebsocket.connect('', 'hello-world');
-
-        const result = await client.callZome({
-          cap_secret: null,
-          role_name: 'hello_world',
-          zome_name: 'hello_world',
-          fn_name: 'hello_world',
-          payload: null,
-        });
-    
-        document.getElementById('content').innerHTML = `<span>${result}</span>`
-      }
-      
-      connect();
-    </script>
+    <app-root></app-root>
+    <script type="module" src="./src/holochain-app.ts"></script>
   </body>
 </html>
