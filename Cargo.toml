@@ -18,3 +18,9 @@ path = "dnas/hello_world/zomes/coordinator/hello_world"
 
 [workspace.dependencies.hello_world_integrity]
 path = "dnas/hello_world/zomes/integrity/hello_world"
+
+[workspace.dependencies.profiles]
+path = "dnas/hello_world/zomes/coordinator/profiles"
+
+[workspace.dependencies.profiles_integrity]
+path = "dnas/hello_world/zomes/integrity/profiles"
