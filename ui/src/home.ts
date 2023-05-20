@@ -1,6 +1,8 @@
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
+import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
+
 @customElement('app-home')
 export class HomeComponent extends LitElement {
   static styles = css`
@@ -10,7 +12,8 @@ export class HomeComponent extends LitElement {
       height: 100%;
       padding: 2rem 1rem;
       color: rgba(255,255,255,1.00);
-      background-color: rgba(0,0,0,1.00)
+      background-color: rgba(0,0,0,1.00);
+      max-height: 100vh;
     }
 
     .logo {
@@ -21,6 +24,17 @@ export class HomeComponent extends LitElement {
       flex: 1;
       padding: 1rem;
       transition: background-color 0.3s, border 0.3s;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
     }
 
     .feature-card.active {
@@ -37,6 +51,7 @@ export class HomeComponent extends LitElement {
     p {
       font-size: 1.2rem;
       font-weight: 300;
+      text-align: center;
     }
   `;
 
@@ -55,19 +70,24 @@ render() {
       <div class="container">
         <img class="logo" src="assets/volla.png" alt="Volla Sync" />
         <div class="feature-card" @click=${() => this.handleClick('ContactList')}>
-        <h2>Contact List</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <sl-icon name="contact"></sl-icon>
+        <div class="details">
+          <h2>Contact List</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>         <sl-icon-button name="pencil" label="Contact List" style="font-size: 2.5rem; margin-top: 1rem;"></sl-icon-button>
           </div>
         <div class="feature-card" @click=${() => this.handleClick('P2PSync')}>
-          <h2>P2P Sync</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <sl-icon name="sync"></sl-icon>
+          <div class="details">
+            <h2>P2P Sync</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <sl-icon-button name="arrow-left-right" label="P2P Sync" style="font-size: 2.5rem; margin-top: 1rem;"></sl-icon-button>
         </div>
         <div class="feature-card" @click=${() => this.handleClick('SecurityZone')}>
-          <h2>Security Zone</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <sl-icon name="security"></sl-icon>
+          <div class="details">
+            <h2>Security Zone</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <sl-icon-button name="shield-lock" label="Security" style="font-size: 2.5rem; margin-top: 1rem; color: white;"></sl-icon-button>
         </div>
       </div>
     `;
