@@ -37,7 +37,7 @@ export class HomeComponent extends LitElement {
     }
     }
 
-    .feature-card.active {
+    .feature-card:active {
       background-color: #f5f5f5;
       border: 2px solid purple;
       border-radius: 8px;

@@ -8,6 +8,7 @@ import { FileStorageClient } from "@holochain-open-dev/file-storage";
 import { AsyncStatus, StoreSubscriber } from '@holochain-open-dev/stores';
 
 import '@shoelace-style/shoelace/dist/themes/dark.css';
+import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
 import "@holochain-open-dev/file-storage/dist/elements/file-storage-context.js";
 import "@holochain-open-dev/profiles/dist/elements/profiles-context.js";
@@ -45,7 +46,7 @@ export class AppComponent extends LitElement {
   fileStorageClient!: any;
   
   async firstUpdated() {
-    this.client = await AppAgentWebsocket.connect(`ws://localhost:17600`, 'hello-world');
+    this.client = await AppAgentWebsocket.connect(`ws://localhost:23185`, 'hello-world');
 
     this.fileStorageClient = new FileStorageClient(this.client, 'hello_world');
 
@@ -75,7 +76,7 @@ export class AppComponent extends LitElement {
       console.log("error fetching profile")
     }
 
-    this.profileCreated = true // !!profileExists;
+    this.profileCreated =  !!profileExists;
     this.loading = false;
   }
   static styles = css`
@@ -103,7 +104,7 @@ export class AppComponent extends LitElement {
     }
   `;
 
-  activeComponent: string | null = null;
+  activeComponent: string | undefined = undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -146,14 +147,20 @@ export class AppComponent extends LitElement {
     }
   }
 
+  goHome() {
+    this.loading = true;
+    this.activeComponent = undefined;
+    this.loading = false;
+  }
+
   renderActiveComponent() {
     switch (this.activeComponent) {
       case 'ContactList':
-        return html`<contact-list></contact-list>`;
+        return html`<sl-icon-button @click=${this.goHome} name="arrow-return-left" label="Return" style="font-size: 2.5rem; position: fixed; left: 1rem; top: 1rem; "></sl-icon-button><contact-list></contact-list>`;
       case 'P2PSync':
-        return html`<p2p-sync></p2p-sync>`;
+        return html`<sl-icon-button @click=${this.goHome} name="arrow-return-left" label="Return" style="font-size: 2.5rem; position: fixed; left: 1rem; top: 1rem; "></sl-icon-button><p2p-sync></p2p-sync>`;
       case 'SecurityZone':
-        return html`<security-zone></security-zone>`;
+        return html`<sl-icon-button @click=${this.goHome} name="arrow-return-left" label="Return" style="font-size: 2.5rem; position: fixed; left: 1rem; top: 1rem; "></sl-icon-button><security-zone></security-zone>`;
       default:
         return html`<app-home></app-home>`;
     }

@@ -6,12 +6,12 @@ import "@holochain-open-dev/file-storage/dist/elements/upload-files.js";
 @customElement('contact-list')
 export class ContactListComponent extends LitElement {
   static styles = css`
-  .container {
-    height: 100vh;
-    display:flex;
-    flex-direction: column;
-    justify-content: start;
-  }
+    .container {
+      height: 100vh;
+      display:flex;
+      flex-direction: column;
+      justify-content: start;
+    }
     h1 {
       font-size: 1.6rem;
       font-weight: 600;
