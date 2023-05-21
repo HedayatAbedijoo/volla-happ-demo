@@ -5,11 +5,15 @@ import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
 import '@shoelace-style/shoelace/dist/components/button-group/button-group.js';
 
 import './Backup';
+import './Restore';
+import { encodeHashToBase64 } from '@holochain/client';
 
 @customElement('contact-list')
 export class ContactListComponent extends LitElement {
   @state() loading = true;
   
+  @state() filesUploaded = [];
+
   activeComponent: string | undefined = undefined;
 
   handleNavigate(event: any) {
@@ -19,6 +23,26 @@ export class ContactListComponent extends LitElement {
     this.loading = false;
   }
 
+  handleUploaded(event: Event) {
+    const payload = (event as CustomEvent).detail;
+    this.loading = true;
+    // eslint-disable-next-line no-console
+    console.log("File upload payload", payload)
+    // eslint-disable-next-line no-console
+    console.log("File hash", encodeHashToBase64(payload.file.hash))
+    this.filesUploaded = [...this.filesUploaded, (payload.file.name)] as any
+    this.loading = false;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('file-uploaded', this.handleUploaded);
+  }
+  
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('file-uploaded', this.handleUploaded);
+  }
   renderTitle() {
     switch (this.activeComponent) {
       case 'Restore':
@@ -58,7 +82,7 @@ export class ContactListComponent extends LitElement {
   renderActiveComponent() {
     switch (this.activeComponent) {
       case 'Restore':
-        return html`<contact-restore></contact-restore>`;
+        return html`<contact-restore .files=${this.filesUploaded}></contact-restore>`;
       case 'Edit':
         return html`<contact-edit></contact-edit>`;
       default:

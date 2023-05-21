@@ -1,6 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { AppAgentClient, AppAgentWebsocket } from '@holochain/client';
+import { AppAgentClient, AppAgentWebsocket, encodeHashToBase64 } from '@holochain/client';
 import { contextProvider } from '@lit-labs/context';
 import { Profile, ProfilesStore, ProfilesClient } from "@holochain-open-dev/profiles";
 import { FileStorageClient } from "@holochain-open-dev/file-storage";
@@ -40,11 +40,12 @@ export class AppComponent extends LitElement {
   profilesStore!: ProfilesStore;
 
   @state() profileCreated = false;
-  
+
   _myProfile!: StoreSubscriber<AsyncStatus<Profile | undefined>>;
 
   fileStorageClient!: any;
-
+  
+  
   activeComponent: string | undefined = undefined;
 
   async firstUpdated() {
@@ -86,7 +87,7 @@ export class AppComponent extends LitElement {
     super.connectedCallback();
     this.addEventListener('navigate', this.handleNavigate);
   }
-
+  
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('navigate', this.handleNavigate);
