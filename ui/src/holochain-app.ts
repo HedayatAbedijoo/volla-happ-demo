@@ -44,9 +44,11 @@ export class AppComponent extends LitElement {
   _myProfile!: StoreSubscriber<AsyncStatus<Profile | undefined>>;
 
   fileStorageClient!: any;
-  
+
+  activeComponent: string | undefined = undefined;
+
   async firstUpdated() {
-    this.client = await AppAgentWebsocket.connect(`ws://localhost:23185`, 'hello-world');
+    this.client = await AppAgentWebsocket.connect(`ws://localhost:18403`, 'hello-world');
 
     this.fileStorageClient = new FileStorageClient(this.client, 'hello_world');
 
@@ -76,35 +78,9 @@ export class AppComponent extends LitElement {
       console.log("error fetching profile")
     }
 
-    this.profileCreated =  !!profileExists;
+    this.profileCreated =  true;
     this.loading = false;
   }
-  static styles = css`
-    .container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Poppins', sans-serif;
-      background-image: url("../assets/bg.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-
-    .spinner {
-      width: 20vh;
-      height: 20vh;
-      margin: auto auto
-    }
-
-    .create-profile {
-      display: grid;
-      place-content: center;
-      height: 100vh;
-    }
-  `;
-
-  activeComponent: string | undefined = undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -166,9 +142,33 @@ export class AppComponent extends LitElement {
     }
   }
 
+  static styles = css`
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background-image: url("../assets/bg.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .spinner {
+      font-size: 8rem;
+      margin: auto auto
+    }
+
+    .create-profile {
+      display: grid;
+      place-content: center;
+      height: 100vh;
+    }
+  `;
+
   render() {
     if (this.loading)
-    return html`<sl-spinner class="spinner"></sl-spinner>`;
+    return html`<div class="container"><sl-spinner class="spinner"></sl-spinner></div>`;
     if (!this.profileCreated) return html`
       <profiles-context .store="${this.profilesStore}">
       <div class="container">

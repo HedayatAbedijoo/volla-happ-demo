@@ -12,7 +12,7 @@ export class HomeComponent extends LitElement {
       height: 100%;
       padding: 2rem 1rem;
       color: rgba(255,255,255,1.00);
-      background-color: rgba(0,0,0,1.00);
+      background-color: rgba(0,0,0,0.80);
       max-height: 100vh;
     }
 
