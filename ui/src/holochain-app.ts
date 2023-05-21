@@ -49,7 +49,7 @@ export class AppComponent extends LitElement {
   activeComponent: string | undefined = undefined;
 
   async firstUpdated() {
-    this.client = await AppAgentWebsocket.connect(`ws://localhost:18403`, 'hello-world');
+    this.client = await AppAgentWebsocket.connect(``, 'hello-world');
 
     this.fileStorageClient = new FileStorageClient(this.client, 'hello_world');
 
@@ -79,7 +79,7 @@ export class AppComponent extends LitElement {
       console.log("error fetching profile")
     }
 
-    this.profileCreated =  true;
+    this.profileCreated =  !!profileExists;
     this.loading = false;
   }
 
